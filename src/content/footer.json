@@ -1,0 +1,19 @@
+{
+  "logo": "/static/logo-light.svg",
+  "tagline": "Crate Crabs",
+  "cta": { "href": "/", "text": "Candy Machine Template" },
+  "social": [
+    {
+      "platform": "twitter",
+      "href": "https://twitter.com/rustaceanNFT"
+    },
+    {
+      "platform": "discord",
+      "href": ""
+    }
+  ],
+  "madeBy": {
+    "text": "Rusty Crab",
+    "href": "https://twitter.com/rustaceanNFT"
+  }
+}

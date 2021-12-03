@@ -1,0 +1,17 @@
+{
+  "subtitle": "The Team",
+  "quotes": [
+    {
+      "jobTitle": "CEO",
+      "name": "Bone Crab",
+      "photo": "/static/team1.png",
+      "href": "https://twitter.com/"
+    },
+    {
+      "jobTitle": "DEV",
+      "name": "Rusty Crab",
+      "photo": "/static/team2.png",
+      "href": "https://twitter.com/"
+    }
+  ]
+}

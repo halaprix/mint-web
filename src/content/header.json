@@ -1,0 +1,22 @@
+{
+  "logoLight": "/static/logo-light.svg",
+  "logoDark": "/static/logo.svg",
+  "links": [
+    {
+      "href": "/",
+      "text": "Home"
+    },
+    {
+      "href": "#sampleWork",
+      "text": "Examples"
+    },
+    {
+      "href": "#team",
+      "text": "Team"
+    },
+    {
+      "href": "#faq",
+      "text": "Faq"
+    }
+  ]
+}
