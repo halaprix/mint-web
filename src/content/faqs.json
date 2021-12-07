@@ -2,16 +2,16 @@
   "title": "Frequently Asked Questions",
   "faqs": [
     {
-      "title": "Question 1",
-      "content": "Answer 1"
+      "title": "Can Cargo handle a Crate Crab?",
+      "content": "Only on 1.56 and above."
     },
     {
-      "title": "Question 2",
-      "content": "Answer 2"
+      "title": "What happens whe you push the Crate Crab onto the stack?",
+      "content": "It will pop off the heap."
     },
     {
-      "title": "Question 3",
-      "content": "Answer 3"
+      "title": "Will option express that Crate Crab is something or nothing?",
+      "content": "Definitely something."
     }
   ]
 }
