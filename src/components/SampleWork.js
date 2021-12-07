@@ -12,7 +12,7 @@ const SampleWork = () => {
       justify="center"
       maxW="100%"
       py={20}
-      sx={{ backgroundColor: "gray", marginTop: 0 }}
+      sx={{ backgroundColor: "#7abac0", marginTop: 0 }}
     >
       <Center position="relative" w="100%" py={16}>
         <Wrap
