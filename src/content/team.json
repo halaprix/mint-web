@@ -1,17 +1,17 @@
 {
-  "subtitle": "The Team",
+  "subtitle": "Surimi Team",
   "quotes": [
     {
-      "jobTitle": "CEO",
+      "jobTitle": "Co-founder, DEV",
       "name": "Bone Crab",
       "photo": "/static/team1.png",
       "href": "https://twitter.com/"
     },
     {
-      "jobTitle": "DEV",
-      "name": "Rusty Crab",
+      "jobTitle": "Co-founder, Artist",
+      "name": "Pkostek.art",
       "photo": "/static/team2.png",
-      "href": "https://twitter.com/"
+      "href": "https://twitter.com/pkostek_art"
     }
   ]
 }
