@@ -13,6 +13,7 @@ const WalletConnectionArea = ({
   startDate,
   treasury,
   txTimeout,
+  rpcHost,
   ...rest
 }) => {
   return (
@@ -72,6 +73,7 @@ const WalletConnectionArea = ({
               startDate={startDate}
               treasury={treasury}
               txTimeout={txTimeout}
+              rpcHost={rpcHost}
             />
           </Link>
         </VStack>

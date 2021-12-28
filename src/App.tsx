@@ -37,7 +37,7 @@ const config = new anchor.web3.PublicKey(
 );
 
 const candyMachineId = new anchor.web3.PublicKey(
-  process.env.REACT_APP_CANDY_MACHINE_ID!
+  process.env.REACT_APP_CANDY_MACHINE_ID_V2!
 );
 
 const network = process.env.REACT_APP_SOLANA_NETWORK as WalletAdapterNetwork;
@@ -76,6 +76,7 @@ const App = () => {
               startDate={startDateSeed}
               treasury={treasury}
               txTimeout={txTimeout}
+              rpcHost={rpcHost}
             />
             <Divider type="dashed" />
             <SampleWork />
