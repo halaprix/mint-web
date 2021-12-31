@@ -27,15 +27,6 @@ import SampleWork from "./components/SampleWork";
 import Team from "./components/Team";
 
 import walletConnectionArea from "./content/wallet-connection-area.json";
-
-const treasury = new anchor.web3.PublicKey(
-  process.env.REACT_APP_TREASURY_ADDRESS!
-);
-
-const config = new anchor.web3.PublicKey(
-  process.env.REACT_APP_CANDY_MACHINE_CONFIG!
-);
-
 const candyMachineId = new anchor.web3.PublicKey(
   process.env.REACT_APP_CANDY_MACHINE_ID_V2!
 );
@@ -71,10 +62,10 @@ const App = () => {
             <WalletConnectionArea
               {...walletConnectionArea}
               candyMachineId={candyMachineId}
-              config={config}
+           
               connection={connection}
               startDate={startDateSeed}
-              treasury={treasury}
+           
               txTimeout={txTimeout}
               rpcHost={rpcHost}
             />

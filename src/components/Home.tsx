@@ -6,19 +6,22 @@ import Alert from "@material-ui/lab/Alert";
 
 import * as anchor from "@project-serum/anchor";
 
-import { useWallet } from '@solana/wallet-adapter-react';
+import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletDialogButton } from "@solana/wallet-adapter-material-ui";
-import { MintButton } from '../MintButton';
+import { MintButton } from "../MintButton";
+import { usePoller } from "../hooks/usePoller";
 
 import {
   awaitTransactionSignatureConfirmation,
   CandyMachineAccount,
   getCandyMachineState,
   mintOneToken,
-  shortenAddress
-} from '../candy-machine';
+  shortenAddress,
+} from "../candy-machine";
 
-const ConnectButton = styled(WalletDialogButton)`background-color: #c33436 !important`;
+const ConnectButton = styled(WalletDialogButton)`
+  background-color: #c33436 !important;
+`;
 
 const CounterText = styled.span``; // add your styles here
 
@@ -63,7 +66,7 @@ const Home = (props: HomeProps) => {
 
   const [alertState, setAlertState] = useState<AlertState>({
     open: false,
-    message: '',
+    message: "",
     severity: undefined,
   });
 
@@ -72,9 +75,8 @@ const Home = (props: HomeProps) => {
   const onMint = async () => {
     try {
       setIsMinting(true);
-      document.getElementById('#identity')?.click();
+      document.getElementById("#identity")?.click();
       if (wallet.connected && candyMachine?.program && wallet.publicKey) {
-
         const mintTxId = (
           await mintOneToken(candyMachine, wallet.publicKey)
         )[0];
@@ -85,35 +87,35 @@ const Home = (props: HomeProps) => {
             mintTxId,
             props.txTimeout,
             props.connection,
-            'singleGossip',
-            true,
+            "singleGossip",
+            true
           );
         }
 
         if (!status?.err) {
           setAlertState({
             open: true,
-            message: 'Congratulations! Mint succeeded!',
-            severity: 'success',
+            message: "Congratulations! Mint succeeded!",
+            severity: "success",
           });
         } else {
           setAlertState({
             open: true,
-            message: 'Mint failed! Please try again!',
-            severity: 'error',
+            message: "Mint failed! Please try again!",
+            severity: "error",
           });
         }
       }
     } catch (error: any) {
       // TODO: blech:
-      let message = error.msg || 'Minting failed! Please try again!';
+      let message = error.msg || "Minting failed! Please try again!";
       if (!error.msg) {
         if (!error.message) {
-          message = 'Transaction Timeout! Please try again.';
-        } else if (error.message.indexOf('0x138')) {
-        } else if (error.message.indexOf('0x137')) {
+          message = "Transaction Timeout! Please try again.";
+        } else if (error.message.indexOf("0x138")) {
+        } else if (error.message.indexOf("0x137")) {
           message = `SOLD OUT!`;
-        } else if (error.message.indexOf('0x135')) {
+        } else if (error.message.indexOf("0x135")) {
           message = `Insufficient funds to mint. Please fund your wallet.`;
         }
       } else {
@@ -128,38 +130,63 @@ const Home = (props: HomeProps) => {
       setAlertState({
         open: true,
         message,
-        severity: 'error',
+        severity: "error",
       });
     } finally {
       setIsMinting(false);
     }
   };
-
+  var pollTime;
+  usePoller(
+    () => {
+      loadItems();
+    },
+    pollTime ? pollTime : 4999
+  );
+  async function loadItems() {
+    if (!anchorWallet) {
+      return;
+    }
+    if (props.candyMachineId) {
+      try {
+        const cndy = await getCandyMachineState(
+          anchorWallet,
+          props.candyMachineId,
+          props.connection
+        );
+        setCandyMachine(cndy);
+        setDisplayAddress(shortenAddress(wallet.publicKey?.toBase58() || ""));
+      } catch (e) {
+        console.log("Problem getting candy machine state");
+        console.log(e);
+      }
+    } else {
+      console.log("No candy machine detected in configuration.");
+    }
+  }
   useEffect(() => {
     (async () => {
       if (!anchorWallet) {
         return;
       }
-      const balance = await props.connection.getBalance(
-        anchorWallet.publicKey,
-      );
+      const balance = await props.connection.getBalance(anchorWallet.publicKey);
       setYourSOLBalance(balance / 1000000000);
-      
+
       if (props.candyMachineId) {
         try {
           const cndy = await getCandyMachineState(
             anchorWallet,
             props.candyMachineId,
-            props.connection,
+            props.connection
           );
           setCandyMachine(cndy);
           setDisplayAddress(shortenAddress(wallet.publicKey?.toBase58() || ""));
         } catch (e) {
-          console.log('Problem getting candy machine state');
+          console.log("Problem getting candy machine state");
           console.log(e);
         }
       } else {
-        console.log('No candy machine detected in configuration.');
+        console.log("No candy machine detected in configuration.");
       }
     })();
   }, [
@@ -172,12 +199,18 @@ const Home = (props: HomeProps) => {
   return (
     <main>
       {anchorWallet && (
-        <p>Wallet: {shortenAddress(anchorWallet.publicKey?.toBase58() || "")}</p>
+        <p>
+          Wallet: {shortenAddress(anchorWallet.publicKey?.toBase58() || "")}
+        </p>
       )}
 
-      {anchorWallet && <p>Balance: {(yourSOLBalance || 0).toLocaleString()} SOL</p>}
+      {anchorWallet && (
+        <p>Balance: {(yourSOLBalance || 0).toLocaleString()} SOL</p>
+      )}
 
-      {anchorWallet && <p>Total Available: {candyMachine?.state.itemsAvailable}</p>}
+      {anchorWallet && (
+        <p>Total Available: {candyMachine?.state.itemsAvailable}</p>
+      )}
 
       {anchorWallet && <p>Redeemed: {candyMachine?.state.itemsRedeemed}</p>}
 
@@ -188,10 +221,10 @@ const Home = (props: HomeProps) => {
           <ConnectButton>Connect Wallet</ConnectButton>
         ) : (
           <MintButton
-          candyMachine={candyMachine}
-          isMinting={isMinting}
-          onMint={onMint}
-        />
+            candyMachine={candyMachine}
+            isMinting={isMinting}
+            onMint={onMint}
+          />
         )}
       </MintContainer>
 
