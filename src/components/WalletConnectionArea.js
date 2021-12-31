@@ -8,10 +8,10 @@ const WalletConnectionArea = ({
   cta,
   backgroundImage,
   candyMachineId,
-  config,
+
   connection,
   startDate,
-  treasury,
+ 
   txTimeout,
   rpcHost,
   ...rest
@@ -68,10 +68,10 @@ const WalletConnectionArea = ({
           <Link href={cta.href}>
             <Home
               candyMachineId={candyMachineId}
-              config={config}
+            
               connection={connection}
               startDate={startDate}
-              treasury={treasury}
+             
               txTimeout={txTimeout}
               rpcHost={rpcHost}
             />
