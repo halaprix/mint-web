@@ -9,7 +9,10 @@ import * as anchor from "@project-serum/anchor";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletDialogButton } from "@solana/wallet-adapter-material-ui";
 import { MintButton } from "../MintButton";
+import { GatewayProvider } from '@civic/solana-gateway-react';
 import { usePoller } from "../hooks/usePoller";
+
+import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
 
 import {
   awaitTransactionSignatureConfirmation,
@@ -17,6 +20,7 @@ import {
   getCandyMachineState,
   mintOneToken,
   shortenAddress,
+  CANDY_MACHINE_PROGRAM,
 } from "../candy-machine";
 
 const ConnectButton = styled(WalletDialogButton)`
@@ -220,11 +224,28 @@ const Home = (props: HomeProps) => {
         {!anchorWallet ? (
           <ConnectButton>Connect Wallet</ConnectButton>
         ) : (
+          <GatewayProvider
+          wallet={{
+            publicKey:
+              wallet.publicKey ||
+              new PublicKey(CANDY_MACHINE_PROGRAM),
+            //@ts-ignore
+            signTransaction: wallet.signTransaction,
+          }}
+          // // Replace with following when added
+          // gatekeeperNetwork={candyMachine.state.gatekeeper_network}
+          gatekeeperNetwork={
+            candyMachine?.state?.gatekeeper?.gatekeeperNetwork
+          } // This is the ignite (captcha) network
+          /// Don't need this for mainnet
+          clusterUrl={rpcUrl}
+          options={{ autoShowModal: false }}
+        >
           <MintButton
             candyMachine={candyMachine}
             isMinting={isMinting}
             onMint={onMint}
-          />
+          /></GatewayProvider>
         )}
       </MintContainer>
 
