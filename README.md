@@ -1,10 +1,8 @@
-## After remixing a Chakra-UI template for [Bonk World](https://www.bonkworld.art/), I decided to make a more generic template for the Metaplex community.
+## Frontend for CandyMachine V2 based on @stranzhay V1 mint page.
 
-## If you like this template, feel free to check out and support my projects. [Bonk World](https://twitter.com/bonk_world) and [Jolly Santa](https://twitter.com/JollySantaNFT)
+## Live Preview Available https://cratecrabs.com/
 
-## I am available on Discord stranzhay#4824. If you're feeling generous in SOL, you can donate to F7snYM4cE5RMbNXcuJTMwcKtxXNtXopJf9PNKXmSqNvv
-
-## Live Preview Available https://candy-machine-mint-xi.vercel.app/
+## Quick guide : define your candy machine address in `.env` file as in the example file `.env-example`
 
 ## This template was a remixed combo of a Chakra-UI template by [Jim Raptis](https://twitter.com/d__raptis), original version [here](https://odin-gilt.vercel.app/), and the [Exiled Apes Candy Machine template](https://github.com/exiled-apes/candy-machine-mint).
 
@@ -52,29 +50,13 @@ yarn build
 
 To run the project, first rename the `.env.example` file at the root directory to `.env` and update the following variables:
 
-```
-REACT_APP_CANDY_MACHINE_CONFIG=__PLACEHOLDER__
-```
-
-This is a Solana account address. You can get the value for this from the `.cache/temp` file. This file is created when you run the `metaplex upload` command in terminal.
 
 ```
-REACT_APP_CANDY_MACHINE_ID=__PLACEHOLDER__
+REACT_APP_CANDY_MACHINE_ID_V2=__PLACEHOLDER__
 ```
 
 Same as above; this is a Solana account address. You can get the value for this from the `./cache/temp` file. This file is created when you run the `metaplex upload` command in terminal.
 
-```
-REACT_APP_TREASURY_ADDRESS=__PLACEHOLDER__
-```
-
-This the Solana address that receives the funds gathered during the minting process. More docs coming as we can test this.
-
-```
-REACT_APP_CANDY_START_DATE=__PLACEHOLDER__
-```
-
-This is a unix time stamp that configures when your mint will be open.
 
 ```
 REACT_APP_SOLANA_NETWORK=devnet
